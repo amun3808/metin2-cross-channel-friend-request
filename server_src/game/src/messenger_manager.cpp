@@ -47,10 +47,7 @@ void MessengerManager::P2PRequestToAdd_Stage1(LPCHARACTER ch, const char* target
 void MessengerManager::P2PRequestToAdd_Stage2(const char* characterName, LPCHARACTER target)
 {
 	if (!target || !target->IsPC())
-	{
-		sys_err("no target..");
 		return;
-	}
 
 	if (quest::CQuestManager::instance().GetPCForce(target->GetPlayerID())->IsRunning())
 		return;
@@ -58,7 +55,6 @@ void MessengerManager::P2PRequestToAdd_Stage2(const char* characterName, LPCHARA
 	if (target->IsBlockMode(BLOCK_MESSENGER_INVITE))
 		return;// could return some response back to the player, but fuck it
 
-	sys_err("character name %s", characterName);
 	MessengerManager::Instance().RegisterRequestToAdd(characterName, target->GetName());
 	target->ChatPacket(CHAT_TYPE_COMMAND, "messenger_auth %s", characterName);
 }
