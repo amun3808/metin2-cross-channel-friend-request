@@ -68,16 +68,7 @@ find
 	if (tch)
 		SendLogin(account, companion);
 
-replace
-	if (tch)
+change
+	if (tch || P2P_MANAGER::Instance().Find(companion.c_str()))
 		SendLogin(account, companion);
-#ifdef CROSS_CHANNEL_FRIEND_REQUEST
-	else
-	{
-		CCI* pkCCI = P2P_MANAGER::Instance().Find(companion.c_str());
-		if (pkCCI)
-			SendLogin(account, companion);
-		else
-			SendLogout(account, companion);
-	}
-#endif
+
